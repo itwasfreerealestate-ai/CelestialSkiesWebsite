@@ -1,0 +1,2346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Skies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== AUDIO ===== -->
+<audio id="entranceMusic" src="audio/entrance.mp3" preload="auto"></audio>
+<audio id="gameMusic" src="audio/game-loop.mp3" preload="auto" loop></audio>
+<audio id="sfxHover" src="audio/hover.mp3" preload="auto"></audio>
+<audio id="sfxClick" src="audio/click.mp3" preload="auto"></audio>
+<audio id="sfxNavHover" src="audio/nav-hover.mp3" preload="auto"></audio>
+
+<!-- ===== PARALLAX LAYERS ===== -->
+<div class="parallax-scene" id="homeParallax">
+    <div class="parallax-layer layer-back" id="layerBack"></div>
+    <canvas class="parallax-layer layer-mid" id="layerMid"></canvas>
+    <div class="parallax-layer layer-front" id="layerFront"></div>
+</div>
+
+<!-- ===== PARTICLES (above parallax) ===== -->
+<canvas class="particle-layer" id="particleCanvas"></canvas>
+
+<!-- ===== LEFT SIDE GRADIENT SWEEP ===== -->
+<div class="left-gradient-sweep" id="leftGradient"></div>
+
+<!-- ===== INSTALL PAGE BACKGROUND ===== -->
+<div class="install-background" id="installBackground"></div>
+
+<!-- ===== NEWS PAGE BACKGROUND ===== -->
+<div class="news-background" id="newsBackground"></div>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="site-header" id="siteHeader">
+    <div class="header-bottom-glow"></div>
+    <div class="header-logo">
+        <img src="images/header-logo.png" alt="Celestial Skies Logo">
+    </div>
+    <ul class="nav-links">
+        <li class="nav-item" id="navHome" data-view="home">
+            <a href="#">HOME</a>
+            <span class="nav-indicator"></span>
+        </li>
+        <li class="nav-item" id="navInstall" data-view="install">
+            <a href="#">iNSTALL</a>
+            <span class="nav-indicator"></span>
+        </li>
+        <li class="nav-item" id="navNews" data-view="news">
+            <a href="#">NEWS</a>
+            <span class="nav-indicator"></span>
+        </li>
+        <li class="nav-item"><a href="#">STORY</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
+
+<!-- ===== HOME VIEW ===== -->
+<div class="view-section" id="homeView">
+
+    <!-- ===== TITLE / SUN ===== -->
+    <div class="title-container" id="titleContainer">
+        <div class="logo-backdrop" id="logoBackdrop"></div>
+        <img src="images/celestial-skies-logo.png" alt="Celestial Skies" class="main-logo">
+        <img src="images/sun.png" alt="Sun" class="rotating-sun">
+    </div>
+
+    <!-- ===== STORY INFO BLOCK ===== -->
+    <div class="story-block" id="storyBlock">
+        <div class="story-gradient-box"></div>
+        <p class="story-text">
+        In a world above the open universe, lies Celestial Skies.<br>
+        Its seemingly peaceful state is disturbed by an ever-forming void,<br>
+        slowly destroying the existence of the game itself.<br>
+        Entity, a celestial guardian who has forgotten her identity,<br>
+        strives to save her known universe through the only being<br>
+        that exceeds the dimensions of her reality — you, the player.
+    </p>
+    </div>
+
+    <!-- ===== PROTOTYPE BLOCK (separated, no gradient) ===== -->
+    <div class="prototype-block" id="prototypeBlock">
+        <div class="prototype-section">
+            <button class="prototype-btn" aria-label="Prototype Available" id="homePrototypeBtn">
+                <img src="images/prototype.png" alt="Prototype Available" class="prototype-img">
+            </button>
+            <div class="prototype-meta">
+                <span>FOR ALL TYPES OF DEVICES.</span>
+                <span>RATIOS MAY VARY.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== UI LAYER ===== -->
+    <div class="ui-layer" id="uiLayer">
+        <div class="continue-container">
+            <img src="images/symbols.png" class="symbols">
+            <div class="continue-text">
+                <h1>PRESS ANYWHERE</h1>
+                <h2>TO CONTINUE</h2>
+            </div>
+        </div>
+        <div class="gradient-line"></div>
+        <p class="copyright">
+            UNAUTHORIZED USE, REPRODUCTION, DISTRIBUTION, OR PUBLICATION OF ANY MATERIALS FOUND ON THIS WEBSITE MAY CONSTITUTE COPYRIGHT INFRINGEMENT AND MAY RESULT IN LEGAL ACTION TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INSTALL VIEW ===== -->
+<div class="view-section" id="installView">
+
+    <!-- Particle layer for install page (reuses home particle system, repositioned) -->
+    <canvas class="particle-layer install-particle-layer" id="installParticleCanvas"></canvas>
+
+    <!-- Spinning dust PNG, behind the characters -->
+    <img src="images/install-dust.png" alt="" class="install-dust" id="installDust">
+
+    <!-- Three characters, above install background/dust but below header -->
+    <img src="images/install-characters.png" alt="Characters" class="install-characters" id="installCharacters">
+
+    <!-- Harsh-left / soft-right gradient overlay -->
+    <div class="install-gradient" id="installGradientOverlay"></div>
+
+    <!-- Spinning PNG behind the prototype CTA / description block -->
+    <img src="images/install-proto-dust.png" alt="" class="install-proto-dust" id="installProtoDust">
+
+    <!-- Prototype CTA + description -->
+    <div class="install-prototype-block" id="installPrototypeBlock">
+        <a href="https://itwasfreerealestate-ai.github.io/CelestialSkies/" class="install-prototype-link" id="installPrototypeBtn">
+            <img src="images/prototype-cta.png" alt="Prototype - Click to Play" class="install-prototype-img">
+        </a>
+        <p class="install-description">
+            This version only includes the half of outer galactic chapter.<br>
+            The following content was not finalized and just a prototype.<br>
+            The version was made early 2026, february.
+        </p>
+    </div>
+
+    <!-- Info / Versions icons, separate section below -->
+    <div class="install-meta-block" id="installMetaBlock">
+        <div class="install-meta-item">
+            <img src="images/info-icon.png" alt="Info" class="install-meta-icon">
+            <span>INFO</span>
+        </div>
+        <div class="install-meta-item">
+            <img src="images/versions-icon.png" alt="Versions" class="install-meta-icon">
+            <span>VERSIONS</span>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- ===== NEWS VIEW ===== -->
+<div class="view-section" id="newsView">
+
+    <!-- Particle layer for news page (reuses home particle system, repositioned) -->
+    <canvas class="particle-layer news-particle-layer" id="newsParticleCanvas"></canvas>
+
+    <!-- Harsh-left / soft-right gradient overlay (reuses install style look) -->
+    <div class="news-gradient" id="newsGradientOverlay"></div>
+
+    <!-- Title + description -->
+    <div class="news-header-block" id="newsHeaderBlock">
+        <h1 class="news-title">LATEST NEWS</h1>
+        <p class="news-description">
+            The following content can be found in the official<br>
+            accounts of Celestial Skies. Updates will be<br>
+            announced on Discord prior.
+        </p>
+    </div>
+
+    <!-- Expand / Patches quick-action icons -->
+    <div class="news-actions-block" id="newsActionsBlock">
+        <div class="news-action-item" id="newsExpandBtn">
+            <img src="images/expand-icon.png" alt="Expand" class="news-action-icon">
+            <span>EXPAND</span>
+        </div>
+        <div class="news-action-item" id="newsPatchesBtn">
+            <img src="images/patches-icon.png" alt="Patches" class="news-action-icon">
+            <span>PATCHES</span>
+        </div>
+    </div>
+
+    <!-- Video cards -->
+    <div class="news-cards" id="newsCards">
+
+        <a class="news-card" id="newsCard1" href="https://www.youtube.com/@hereisval" target="_blank" rel="noopener">
+            <div class="news-card-media">
+                <iframe
+                    id="newsVideo1"
+                    src="https://www.youtube.com/embed/VIDEO_ID_1"
+                    title="Celestial Skies News Video 1"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="news-card-info">
+                <h3 class="news-card-title">TITLE HERE..</h3>
+                <p class="news-card-desc">
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE
+                </p>
+                <span class="news-card-date">DATE:</span>
+            </div>
+        </a>
+
+        <a class="news-card" id="newsCard2" href="https://www.youtube.com/@hereisval" target="_blank" rel="noopener">
+            <div class="news-card-media">
+                <iframe
+                    id="newsVideo2"
+                    src="https://www.youtube.com/embed/VIDEO_ID_2"
+                    title="Celestial Skies News Video 2"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="news-card-info">
+                <h3 class="news-card-title">TITLE HERE..</h3>
+                <p class="news-card-desc">
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE
+                </p>
+                <span class="news-card-date">DATE:</span>
+            </div>
+        </a>
+
+        <a class="news-card" id="newsCard3" href="https://www.youtube.com/@hereisval" target="_blank" rel="noopener">
+            <div class="news-card-media">
+                <iframe
+                    id="newsVideo3"
+                    src="https://www.youtube.com/embed/VIDEO_ID_3"
+                    title="Celestial Skies News Video 3"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="news-card-info">
+                <h3 class="news-card-title">TITLE HERE..</h3>
+                <p class="news-card-desc">
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE<br>
+                    DESCRIPTION HERE SHOULD BE HERE HERE HRE
+                </p>
+                <span class="news-card-date">DATE:</span>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+<style>
+/* =============================================
+   FRONT LAYER ADJUSTMENT CONTROLS
+============================================= */
+:root {
+    --front-scale:    0.980;
+    --front-x:        180px;
+    --front-y:        60px;
+    --front-origin-x: 50%;
+    --front-origin-y: -420%;
+
+    /* ===== INSTALL PAGE ADJUSTMENT CONTROLS ===== */
+
+    /* background blur */
+    --install-bg-blur: 8px;
+
+    /* characters image (right side, above other layers, below header) */
+--install-char-width: 1000px;
+--install-char-right: -40px;
+--install-char-bottom: -10px;
+
+    /* dust layer behind characters */
+    --install-dust-width:   60vw;
+    --install-dust-right:   -5vw;
+    --install-dust-bottom:  -5vh;
+    --install-dust-opacity: 0.8;
+    --install-dust-spin-duration: 60s;
+
+    /* harsh-left / soft-right gradient overlay */
+    --install-gradient-strength: 0.92;
+
+    /* prototype CTA block position/size */
+    --install-proto-left:   225px;
+    --install-proto-top:    250px;
+    --install-proto-img-width: 460px;
+    --install-proto-text-width: 460px;
+    --install-proto-text-gap: 14px;
+
+    /* info / versions meta block position */
+    --install-meta-left:   80px;
+    --install-meta-bottom: 50px;
+    --install-meta-gap:    34px;
+    --install-meta-icon-size: 40px;
+
+    /* spinning png behind the prototype CTA/text block */
+    --install-proto-dust-width:   350px;
+    --install-proto-dust-left:    250px;
+    --install-proto-dust-top:     200px;
+    --install-proto-dust-opacity: 0.55;
+    --install-proto-dust-spin-duration: 80s;
+    --install-proto-dust-spin-direction: normal; /* normal | reverse */
+
+    /* install page particle layer position/size */
+    --install-particle-left:   0px;
+    --install-particle-top:    0px;
+    --install-particle-width:  100vw;
+    --install-particle-height: 100vh;
+
+    /* ===== NEWS PAGE ADJUSTMENT CONTROLS ===== */
+
+    /* background blur (reuses install-background image) */
+    --news-bg-blur: 8px;
+
+    /* harsh-left / soft-right gradient overlay */
+    --news-gradient-strength: 0.55;
+
+    /* news page particle layer position/size */
+    --news-particle-left:   0px;
+    --news-particle-top:    0px;
+    --news-particle-width:  100vw;
+    --news-particle-height: 100vh;
+
+    /* header / description block position */
+    --news-header-left: 70px;
+    --news-header-top:  120px;
+    --news-header-width: 700px;
+
+    /* ----- expand / patches action icons ----- */
+    --news-actions-top:    132px;
+    --news-actions-right:  70px;
+    --news-actions-gap:    56px;
+    --news-actions-icon-size: 42px;
+
+    /* ----- cards row container ----- */
+    --news-cards-left:   70px;
+    --news-cards-right:  70px;
+    --news-cards-top:    250px;
+    --news-cards-bottom: 60px;
+    --news-cards-gap:    28px;
+
+    /* ----- individual card sizing -----
+       Each card flexes within the row; control min/max width
+       and aspect ratio (16:9 video) per-card if needed. */
+    --news-card-min-width: 220px;
+    --news-card-radius:    6px;
+    --news-card-border-color: rgba(180,140,255,0.0);
+    --news-card-border-color-active: rgba(180,140,255,0.85);
+    --news-card-bg: rgba(10,8,18,0.55);
+
+    /* per-card width ratios (relative flex-grow values) */
+    --news-card1-flex: 1.3;
+    --news-card2-flex: 1;
+    --news-card3-flex: 1;
+
+    /* per-card aspect ratio (width / height) */
+    --news-card-aspect: 16 / 9;
+
+    /* ----- card info section (title / description / date) ----- */
+    --news-card-info-padding: 14px 16px;
+    --news-card-title-size:   1.15rem;
+    --news-card-desc-size:    0.5rem;
+    --news-card-date-size:    0.6rem;
+
+    /* ----- staggered slide-up entrance for cards ----- */
+    --news-card-stagger-delay: 220ms; /* gap between each card's entrance */
+    --news-card-slide-distance: 60px;
+
+    /* ===== GLOBAL RESPONSIVE SCALE =====
+       Multiplies fixed left/top offsets & widths for story,
+
+       prototype, install and news blocks so their RELATIVE
+       on-screen position/proportions are preserved across
+       smaller viewports. 1 = desktop (unchanged). */
+    --layout-scale: 1;
+}
+
+/* =============================================
+   RESPONSIVE BREAKPOINTS
+   Desktop (default, >1024px): scale = 1 (unchanged)
+   Tablet  (601px - 1024px):   scale ~0.72
+   Phone   (<= 600px):         scale ~0.46
+============================================= */
+@media (max-width: 1024px) {
+    :root { --layout-scale: 0.72; }
+}
+@media (max-width: 600px) {
+    :root { --layout-scale: 0.46; }
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background: #000;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Cinzel', serif;
+}
+
+/* =============================================
+   VIEW SECTIONS (SPA toggle)
+============================================= */
+.view-section {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+    z-index: 10;
+}
+
+.view-section.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* =============================================
+   PARALLAX SCENE (home)
+============================================= */
+.parallax-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+}
+
+.parallax-scene.hidden { opacity: 0; }
+
+.parallax-layer {
+    position: absolute;
+    inset: -60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease;
+    will-change: transform, opacity;
+}
+
+.layer-back {
+    background-image: url('images/parallax-back.png');
+    background-color: #03020d;
+}
+
+#layerMid { background-image: none; }
+
+.layer-front {
+    background-image: url('images/parallax-front.png');
+    background-size: auto calc(100% * var(--front-scale));
+    background-position: 70% 80%;
+    transform-origin: var(--front-origin-x) var(--front-origin-y);
+    transform: translate(var(--front-x), var(--front-y)) scale(var(--front-scale));
+}
+
+.parallax-layer.visible { opacity: 1; }
+
+/* =============================================
+   PARTICLE LAYER (above parallax, cinematic dust/stars)
+============================================= */
+.particle-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2.5s ease;
+}
+.particle-layer.visible { opacity: 1; }
+.particle-layer.hidden  { opacity: 0 !important; }
+
+/* =============================================
+   LEFT GRADIENT SWEEP (home)
+============================================= */
+.left-gradient-sweep {
+    position: fixed;
+    left: 0; top: 0;
+    width: 50vw;
+    height: 100vh;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity 0.8s ease;
+    background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.98) 0%,
+    rgba(0,0,0,0.95) 18%,
+    rgba(0,0,0,0.88) 35%,
+    rgba(0,0,0,0.75) 50%,
+    rgba(0,0,0,0.55) 65%,
+    rgba(0,0,0,0.30) 80%,
+    rgba(0,0,0,0.12) 92%,
+    rgba(0,0,0,0.00) 100%
+);
+}
+.left-gradient-sweep.hidden { opacity: 0; }
+
+.left-gradient-sweep::before {
+    content: "";
+    position: absolute;
+    left: -15%; top: -20%;
+    width: 130%; height: 140%;
+    background: radial-gradient(
+        ellipse at left center,
+        rgba(0,0,0,0.75) 0%,
+        rgba(0,0,0,0.55) 25%,
+        rgba(0,0,0,0.35) 45%,
+        rgba(0,0,0,0.15) 70%,
+        transparent 100%
+    );
+    filter: blur(90px);
+    animation: leftPulse 8s ease-in-out infinite;
+}
+.left-gradient-sweep::after {
+    content: "";
+    position: absolute;
+    left: -10%; top: 0;
+    width: 120%; height: 100%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.10), rgba(150,200,255,0.05), transparent);
+    filter: blur(70px);
+    animation: leftFlow 15s linear infinite;
+}
+@keyframes leftPulse {
+    0%   { transform: translateX(-30px) scale(1);    opacity: .6; }
+    50%  { transform: translateX(20px)  scale(1.15); opacity: 1;  }
+    100% { transform: translateX(-30px) scale(1);    opacity: .6; }
+}
+@keyframes leftFlow {
+    from { transform: translateX(-150px); }
+    to   { transform: translateX(150px);  }
+}
+
+/* =============================================
+   INSTALL PAGE BACKGROUND
+============================================= */
+.install-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    /* placeholder background — replace with image later */
+    background: linear-gradient(160deg, #050308 0%, #0c0a18 45%, #15102a 100%);
+    background-image: url('images/install-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    filter: blur(var(--install-bg-blur));
+    transform: scale(1.05); /* avoid blurred edges showing */
+}
+.install-background.visible { opacity: 1; }
+
+/* =============================================
+   NEWS PAGE BACKGROUND
+   (reuses the same background image as install,
+   independently adjustable blur/opacity)
+============================================= */
+.news-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(160deg, #050308 0%, #0c0a18 45%, #15102a 100%);
+    background-image: url('images/install-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    filter: blur(var(--news-bg-blur));
+    transform: scale(1.05);
+}
+.news-background.visible { opacity: 1; }
+
+/* ===== HEADER ===== */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 84px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 42px;
+    background: linear-gradient(90deg, #000000, #0a0a0a, #111111, #080808, #000000);
+    background-size: 300% 100%;
+    animation: headerGradientShift 6s ease infinite;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+
+    overflow: visible; /* important so glow can escape */
+}
+
+
+.site-header.visible { transform: translateY(0); opacity: 1; }
+
+@keyframes headerGradientShift {
+    0%   { background-position: 0% 50%;   }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%;   }
+}
+
+/* Subtle white gradient glow below the header */
+.header-bottom-glow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.07) 0%,
+        rgba(255,255,255,0.02) 45%,
+        transparent 100%
+    );
+
+    /* IMPORTANT: remove any layout influence */
+    flex: 0 0 auto;
+}
+
+.header-logo img {
+    height: 78px; width: auto;
+    object-fit: contain;
+    filter: brightness(1.15);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.header-logo:hover img {
+    filter: brightness(1.35) drop-shadow(0 0 14px rgba(180,200,255,0.6));
+    transform: scale(1.04);
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    list-style: none;
+    gap: 52px;
+}
+
+.nav-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-links a {
+    color: rgba(255,255,255,0.80);
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 3.5px;
+    transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease, letter-spacing 0.25s ease;
+    padding-bottom: 14px;
+    cursor: pointer;
+    display: inline-block;
+}
+.nav-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 12px rgba(255,255,255,0.55), 0 0 22px rgba(180,200,255,0.45);
+    transform: translateY(-2px);
+    letter-spacing: 4px;
+}
+
+/* Active link indicator — soft glowing line beneath active nav item */
+.nav-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95), transparent);
+    box-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(180,200,255,0.5);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+/* Hover preview indicator — gives immediate feedback even for
+   non-active items, slightly shorter & dimmer than active */
+.nav-item:not(.active) .nav-indicator {
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+.nav-item:not(.active):hover .nav-indicator {
+    width: 60%;
+    opacity: 0.55;
+}
+
+.nav-item.active .nav-indicator {
+    width: 100%;
+    opacity: 1;
+    animation: navIndicatorPulse 3s ease-in-out infinite;
+}
+
+@keyframes navIndicatorGrow {
+    from { width: 0; opacity: 0; }
+    to   { width: 100%; opacity: 1; }
+}
+
+@keyframes navIndicatorPulse {
+    0%, 100% { opacity: 0.6; box-shadow: 0 0 8px rgba(255,255,255,0.6), 0 0 16px rgba(180,200,255,0.35); }
+    50%      { opacity: 1;   box-shadow: 0 0 14px rgba(255,255,255,1), 0 0 26px rgba(180,200,255,0.6); }
+}
+
+.nav-item.active a { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.4); }
+
+.hamburger {
+    margin-left: auto;
+    background: none; border: none; cursor: pointer;
+    display: flex; flex-direction: column; gap: 6px; padding: 4px;
+}
+.hamburger span {
+    display: block; width: 26px; height: 2.5px;
+    background: rgba(255,255,255,0.85); border-radius: 2px;
+    transition: background 0.2s, transform 0.3s ease, opacity 0.3s ease;
+}
+.hamburger:hover span { background: #fff; }
+.hamburger:hover span:nth-child(1) { transform: translateY(1px) rotate(-2deg); }
+.hamburger:hover span:nth-child(3) { transform: translateY(-1px) rotate(2deg); }
+
+/* ===== TITLE CONTAINER ===== */
+.title-container {
+    position: relative;
+    width: 100%; height: 420px;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 10;
+    transition: transform 4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+.title-container.drifted {
+    transform: translate(calc(-25vw * var(--layout-scale)), calc(33px * var(--layout-scale))) scale(calc(1 + (1.6 - 1) * var(--layout-scale)));
+}
+
+.main-logo {
+    position: absolute;
+    width: 300px;
+    top: 50%; left: 49%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 2;
+    /* entrance: gentle materialize with slight upward drift */
+    opacity: 0;
+    filter: drop-shadow(0 0 0px rgba(180,200,255,0));
+    animation: logoMaterialize 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+@keyframes logoMaterialize {
+    0%   { opacity: 0; transform: translate(-50%, -38%) scale(0.92); filter: drop-shadow(0 0 0px rgba(180,200,255,0)); }
+    60%  { opacity: 1; transform: translate(-50%, -51%) scale(1.015); filter: drop-shadow(0 0 18px rgba(180,200,255,0.35)); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 0 0px rgba(180,200,255,0)); }
+}
+
+.rotating-sun {
+    position: absolute;
+    top: 50%; left: 43.2%;
+    width: 80px;
+    transform: translate(-50%, -50%) scale(10);
+    z-index: 3;
+    animation: spin 20s linear infinite, sunFlareIn 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0s forwards;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes sunFlareIn {
+    0%   { opacity: 0; filter: brightness(2.6) blur(6px); }
+    45%  { opacity: 1; filter: brightness(2.2) blur(2px); }
+    100% { opacity: 1; filter: brightness(1) blur(0px); }
+}
+
+/* =============================================
+   STORY BLOCK
+============================================= */
+.story-block {
+    position: fixed;
+    left: calc(90px * var(--layout-scale));
+    top: 60%;
+    width: calc(650px * var(--layout-scale));
+    z-index: 8;
+    opacity: 0;
+    transform: translateX(-24px) translateY(30px);
+    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.story-block.visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    pointer-events: auto;
+}
+
+.story-gradient-box {
+    position: absolute;
+    inset: -30px -40px -30px -30px;
+    border-radius: 6px;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.96) 0%,
+        rgba(0,0,0,0.90) 30%,
+        rgba(0,0,0,0.65) 60%,
+        rgba(0,0,0,0.20) 88%,
+        transparent 100%
+    );
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+}
+
+.story-text {
+    position: relative;
+    font-size: calc(0.82rem * var(--layout-scale));
+    line-height: 2.1;
+    letter-spacing: 1.4px;
+    color: rgba(255,255,255,0.92);
+    text-transform: uppercase;
+    max-width: 600px;
+    z-index: 1;
+}
+
+/* =============================================
+   PROTOTYPE BLOCK
+============================================= */
+.prototype-block {
+    position: fixed;
+    left: calc(80px * var(--layout-scale));
+    top: calc(60% + (200px * var(--layout-scale)));
+    width: calc(650px * var(--layout-scale));
+    z-index: 8;
+    opacity: 0;
+    transform: translateX(-18px) translateY(20px) scale(0.96);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    pointer-events: none;
+}
+
+.prototype-block.visible {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.prototype-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.prototype-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.92;
+    transition: opacity 0.2s, filter 0.2s, transform 0.2s ease;
+    flex-shrink: 0;
+}
+.prototype-btn:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(180, 140, 255, 0.55));
+    transform: scale(1.04);
+}
+.prototype-btn:active {
+    transform: scale(0.97);
+}
+
+.prototype-img {
+    display: block;
+    height: calc(52px * var(--layout-scale));
+    width: auto;
+    object-fit: contain;
+}
+
+.prototype-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: calc(0.48rem * var(--layout-scale));
+    letter-spacing: 1.8px;
+    color: rgba(255, 255, 255, 0.60);
+    text-transform: uppercase;
+    line-height: 1.6;
+}
+
+/* ===== UI LAYER ===== */
+.ui-layer {
+    position: absolute;
+    top: 78%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
+}
+
+.continue-container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.symbols { width: 100px; animation: pulseGlow 4s ease-in-out infinite; }
+.continue-text { text-align: center; animation: pulseGlow 4s ease-in-out infinite; }
+.continue-text h1 { font-size: 1.5rem; letter-spacing: 2px; }
+.continue-text h2 { font-size: 0.9rem; letter-spacing: 2px; }
+
+.gradient-line {
+    margin-top: 40px; width: 550px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+}
+.copyright {
+    margin-top: 25px; width: 650px;
+    text-align: center; font-size: 8px; line-height: 1.6; opacity: 0.65; letter-spacing: 1px;
+}
+
+@keyframes spin {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg); }
+}
+@keyframes pulseGlow {
+    0%   { opacity: 0.55; filter: drop-shadow(0 0 3px rgba(255,255,255,0.3)); }
+    50%  { opacity: 1;    filter: drop-shadow(0 0 12px rgba(255,255,255,0.9)); }
+    100% { opacity: 0.55; filter: drop-shadow(0 0 3px rgba(255,255,255,0.3)); }
+}
+
+body.exit .title-container { transform: translateY(-100%); }
+
+/* =============================================
+   INSTALL VIEW
+============================================= */
+#installView {
+    /* container only; children are positioned absolutely / fixed */
+    overflow: hidden;
+}
+
+/* ----- Harsh-left / soft-right gradient overlay -----
+   Sits above the background+dust+characters, below the
+   prototype/meta content (which has its own higher z-index). */
+.install-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease 0.2s;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 1.0))   0%,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 0.92)) 15%,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 0.78)) 32%,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 0.55)) 50%,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 0.32)) 65%,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 0.14)) 80%,
+        rgba(0,0,0, calc(var(--install-gradient-strength) * 0.04)) 92%,
+        rgba(0,0,0, 0) 100%
+    );
+}
+#installView.active .install-gradient { opacity: 1; }
+
+/* ----- Spinning dust PNG (behind characters) ----- */
+.install-dust {
+    position: fixed;
+    right: var(--install-dust-right);
+    bottom: var(--install-dust-bottom);
+    width: var(--install-dust-width);
+    height: auto;
+    z-index: 0;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 1.5s ease 0.4s;
+    pointer-events: none;
+    animation: installDustSpin var(--install-dust-spin-duration) linear infinite;
+    transform-origin: center center;
+}
+#installView.active .install-dust { opacity: var(--install-dust-opacity); }
+
+@keyframes installDustSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ----- Spinning PNG behind the prototype CTA / description ----- */
+.install-proto-dust {
+    position: fixed;
+    left: var(--install-proto-dust-left);
+    top: var(--install-proto-dust-top);
+    width: var(--install-proto-dust-width);
+    height: auto;
+    z-index: 1;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 1.5s ease 0.5s;
+    pointer-events: none;
+    animation: installProtoDustSpin var(--install-proto-dust-spin-duration) linear infinite;
+    animation-direction: var(--install-proto-dust-spin-direction);
+    transform-origin: center center;
+}
+#installView.active .install-proto-dust { opacity: var(--install-proto-dust-opacity); }
+
+@keyframes installProtoDustSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ----- Install page particle layer (reuses home particle system) ----- */
+.install-particle-layer {
+    position: fixed;
+    inset: auto;
+    left: var(--install-particle-left);
+    top: var(--install-particle-top);
+    right: auto;
+    bottom: auto;
+    width: var(--install-particle-width);
+    height: var(--install-particle-height);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2s ease 0.3s;
+}
+#installView.active .install-particle-layer { opacity: 1; }
+
+
+/* ----- Three characters image -----
+   Above background/dust/gradient (z-index 5), below the
+   site header (z-index 1000). */
+.install-characters {
+    position: fixed;
+    right: calc(var(--install-char-right) * var(--layout-scale));
+    bottom: calc(var(--install-char-bottom) * var(--layout-scale));
+    width: calc(var(--install-char-width) * var(--layout-scale));
+    height: auto;
+    max-height: 100vh;
+    z-index: 5;
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s, transform 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    pointer-events: none;
+    object-fit: contain;
+    object-position: bottom right;
+}
+#installView.active .install-characters {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ----- Prototype CTA + description block ----- */
+.install-prototype-block {
+    position: fixed;
+    left: calc(var(--install-proto-left) * var(--layout-scale));
+    top: calc(var(--install-proto-top) * var(--layout-scale));
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    gap: var(--install-proto-text-gap);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+    pointer-events: none;
+}
+#installView.active .install-prototype-block {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.install-prototype-link {
+    display: inline-block;
+    width: calc(var(--install-proto-img-width) * var(--layout-scale));
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+.install-prototype-link:hover {
+    transform: translateY(-2px) scale(1.015);
+    filter: drop-shadow(0 0 16px rgba(180,200,255,0.4));
+}
+.install-prototype-link:active {
+    transform: translateY(0) scale(0.985);
+}
+
+.install-prototype-img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.install-description {
+    width: calc(var(--install-proto-text-width) * var(--layout-scale));
+    font-size: calc(1.2rem * var(--layout-scale));
+    line-height: 1.5;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.82);
+    text-transform: uppercase;
+}
+
+/* ----- Info / Versions meta block (separate section) ----- */
+.install-meta-block {
+    position: fixed;
+    left: calc(var(--install-meta-left) * var(--layout-scale));
+    bottom: calc(var(--install-meta-bottom) * var(--layout-scale));
+    z-index: 6;
+    display: flex;
+    gap: calc(var(--install-meta-gap) * var(--layout-scale));
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+    pointer-events: none;
+}
+#installView.active .install-meta-block {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.install-meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+    opacity: 0.85;
+}
+.install-meta-item:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+    transform: translateY(-2px);
+}
+.install-meta-item:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.install-meta-icon {
+    width: calc(var(--install-meta-icon-size) * var(--layout-scale));
+    height: calc(var(--install-meta-icon-size) * var(--layout-scale));
+    object-fit: contain;
+}
+
+.install-meta-item span {
+    font-size: calc(0.55rem * var(--layout-scale));
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+}
+
+/* =============================================
+   NEWS VIEW
+============================================= */
+#newsView {
+    overflow: hidden;
+}
+
+/* ----- Harsh-left / soft-right gradient overlay ----- */
+.news-gradient {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease 0.2s;
+    background: linear-gradient(
+        90deg,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 1.0))   0%,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 0.92)) 15%,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 0.78)) 32%,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 0.55)) 50%,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 0.32)) 65%,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 0.14)) 80%,
+        rgba(0,0,0, calc(var(--news-gradient-strength) * 0.04)) 92%,
+        rgba(0,0,0, 0) 100%
+    );
+}
+#newsView.active .news-gradient { opacity: 1; }
+
+/* ----- News page particle layer (reuses home particle system) ----- */
+.news-particle-layer {
+    position: fixed;
+    inset: auto;
+    left: var(--news-particle-left);
+    top: var(--news-particle-top);
+    right: auto;
+    bottom: auto;
+    width: var(--news-particle-width);
+    height: var(--news-particle-height);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2s ease 0.3s;
+}
+#newsView.active .news-particle-layer { opacity: 1; }
+
+/* ----- Title + description block ----- */
+.news-header-block {
+    position: fixed;
+    left: calc(var(--news-header-left) * var(--layout-scale));
+    top: calc(var(--news-header-top) * var(--layout-scale));
+    width: calc(var(--news-header-width) * var(--layout-scale));
+    z-index: 6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    pointer-events: none;
+}
+#newsView.active .news-header-block {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.news-title {
+    font-size: calc(2.4rem * var(--layout-scale));
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    text-shadow: 0 0 20px rgba(180,200,255,0.25);
+}
+
+.news-description {
+    font-size: calc(0.72rem * var(--layout-scale));
+    line-height: 1.9;
+    letter-spacing: 1.2px;
+    color: rgba(255,255,255,0.78);
+    text-transform: uppercase;
+    max-width: 520px;
+}
+
+/* ----- Expand / Patches action icons ----- */
+.news-actions-block {
+    position: fixed;
+    top: calc(var(--news-actions-top) * var(--layout-scale));
+    right: calc(var(--news-actions-right) * var(--layout-scale));
+    z-index: 6;
+    display: flex;
+    gap: calc(var(--news-actions-gap) * var(--layout-scale));
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+    pointer-events: none;
+}
+#newsView.active .news-actions-block {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.news-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+}
+.news-action-item:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(180,200,255,0.55));
+    transform: translateY(-2px);
+}
+.news-action-item:active {
+    transform: translateY(0) scale(0.96);
+}
+
+.news-action-icon {
+    width: calc(var(--news-actions-icon-size) * var(--layout-scale));
+    height: calc(var(--news-actions-icon-size) * var(--layout-scale));
+    object-fit: contain;
+}
+
+.news-action-item span {
+    font-size: calc(0.6rem * var(--layout-scale));
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.78);
+    text-transform: uppercase;
+}
+
+/* ----- Cards row ----- */
+.news-cards {
+    position: fixed;
+    left: calc(var(--news-cards-left) * var(--layout-scale));
+    right: calc(var(--news-cards-right) * var(--layout-scale));
+    top: calc(var(--news-cards-top) * var(--layout-scale));
+    bottom: calc(var(--news-cards-bottom) * var(--layout-scale));
+    z-index: 6;
+    display: flex;
+    align-items: stretch;
+    gap: calc(var(--news-cards-gap) * var(--layout-scale));
+    pointer-events: none;
+}
+#newsView.active .news-cards {
+    pointer-events: auto;
+}
+
+/* ----- Individual card -----
+   Each card is a column: thumbnail on top (fixed aspect ratio),
+   info block (title/description/date) below. Cards enter with
+   a staggered slide-up + fade, one after another. */
+.news-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: calc(var(--news-card-min-width) * var(--layout-scale));
+    border-radius: var(--news-card-radius);
+    background: var(--news-card-bg);
+    border: 2px solid var(--news-card-border-color);
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease,
+                opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), translate 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* entrance state */
+    opacity: 0;
+    transform: translateY(var(--news-card-slide-distance));
+}
+#newsView.active .news-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* staggered delays — one card slides up after another */
+#newsCard1 { transition-delay: 0.3s; }
+#newsCard2 { transition-delay: calc(0.3s + var(--news-card-stagger-delay)); }
+#newsCard3 { transition-delay: calc(0.3s + var(--news-card-stagger-delay) * 2); }
+
+.news-card:hover {
+    border-color: var(--news-card-border-color-active);
+    transform: translateY(-4px);
+    box-shadow: 0 0 24px rgba(180,140,255,0.35);
+}
+#newsView.active .news-card:hover { transform: translateY(-4px); }
+
+#newsCard1 { flex: var(--news-card1-flex) 1 0; }
+#newsCard2 { flex: var(--news-card2-flex) 1 0; }
+#newsCard3 { flex: var(--news-card3-flex) 1 0; }
+
+/* thumbnail: fixed aspect ratio at the top of the card */
+.news-card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--news-card-aspect);
+    flex-shrink: 0;
+    background: #fff;
+}
+
+.news-card-media iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none; /* card itself is the click target */
+}
+
+/* info section below thumbnail */
+.news-card-info {
+    padding: var(--news-card-info-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.news-card-title {
+    font-size: calc(var(--news-card-title-size) * var(--layout-scale));
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.95);
+    text-shadow: 0 0 14px rgba(180,200,255,0.2);
+}
+
+.news-card-desc {
+    font-size: calc(var(--news-card-desc-size) * var(--layout-scale));
+    line-height: 1.6;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    flex: 1;
+}
+
+.news-card-date {
+    font-size: calc(var(--news-card-date-size) * var(--layout-scale));
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+}
+
+/* =============================================
+   RESPONSIVE: PHONE (<= 600px)
+   Extra layout tweaks beyond the global --layout-scale,
+   for elements where proportional scaling alone isn't
+   enough (e.g. very wide fixed containers, news cards
+   row that should wrap instead of squeeze).
+============================================= */
+@media (max-width: 600px) {
+    .install-prototype-block {
+        max-width: calc(100vw - (var(--install-proto-left) * var(--layout-scale) * 2));
+    }
+
+    .story-block, .prototype-block {
+        max-width: calc(100vw - (180px * var(--layout-scale)));
+    }
+
+    /* =============================================
+       NEWS PAGE — MOBILE REDESIGN
+       Stacked flow: header/description, then an action
+       row, then a scrollable list of horizontal cards.
+       Offsets clear the fixed 84px site header (which
+       was previously overlapping the news content).
+    ============================================= */
+    .news-header-block {
+        left: 20px;
+        top: 100px;
+        width: calc(100vw - 40px);
+        max-width: none;
+    }
+    .news-title {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+    }
+    .news-description {
+        font-size: 0.7rem;
+        line-height: 1.7;
+        max-width: 100%;
+    }
+
+    .news-actions-block {
+        top: 198px;
+        left: 20px;
+        right: auto;
+        bottom: auto;
+        gap: 28px;
+    }
+    .news-action-icon {
+        width: 28px;
+        height: 28px;
+    }
+    .news-action-item span {
+        font-size: 0.6rem;
+    }
+
+    /* ----- Card list ----- */
+    .news-cards {
+        left: 16px;
+        right: 16px;
+        top: 268px;
+        bottom: 16px;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: auto;
+        overflow-y: auto;
+        gap: 14px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .news-card {
+        flex-direction: row;
+        min-width: 100%;
+        height: 104px;
+    }
+    #newsCard1, #newsCard2, #newsCard3 {
+        flex: 0 0 auto;
+    }
+
+    .news-card-media {
+        width: 132px;
+        height: 100%;
+        aspect-ratio: unset;
+        flex-shrink: 0;
+    }
+
+    .news-card-info {
+        padding: 10px 12px;
+        gap: 4px;
+        justify-content: center;
+    }
+    .news-card-title {
+        font-size: 0.85rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .news-card-desc {
+        font-size: 0.62rem;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .news-card-date {
+        font-size: 0.6rem;
+    }
+}
+
+/* =================================
+   MOBILE HOME SCREEN
+================================= */
+@media (max-width: 600px) {
+
+    .main-logo{
+        width:220px;
+        left:50%;
+        top:42%;
+    }
+
+    .rotating-sun{
+        width:60px;
+        left:38%;
+        top:41%;
+        transform:translate(-50%,-50%) scale(7);
+    }
+
+    .symbols{
+        width:70px;
+    }
+
+    .continue-text h1{
+        font-size:1rem;
+    }
+
+    .continue-text h2{
+        font-size:0.7rem;
+    }
+
+    .gradient-line{
+        width:280px;
+    }
+
+    .copyright{
+        width:90vw;
+        font-size:6px;
+    }
+}
+@media (max-width:600px){
+
+    .story-block{
+        left:20px;
+        top:58%;
+        width:85vw;
+    }
+
+    .story-text{
+        font-size:0.55rem;
+        line-height:1.8;
+    }
+
+    .prototype-block{
+        left:20px;
+        top:78%;
+        width:85vw;
+    }
+
+    .prototype-img{
+        height:40px;
+    }
+
+}
+@media (max-width:600px){
+
+    :root{
+
+        --front-scale:0.9;
+        --front-x:80px;
+        --front-y:370px;
+
+    }
+@media (max-width:600px){
+
+    :root{
+
+        --install-char-width:1150px;
+        --install-char-right:-150px;
+        --install-char-bottom:-8px;
+
+    }
+
+}
+}
+@media (max-width:600px){
+
+    :root{
+
+        --install-proto-left:100px;
+        --install-proto-top:350px;
+
+        --install-proto-img-width:1000px;
+
+        --install-proto-text-width:1000px;
+
+    }
+
+}
+@media (max-width:600px){
+
+    :root{
+
+        --install-meta-left:20px;
+
+        --install-meta-bottom:30px;
+
+        --install-meta-icon-size:32px;
+
+    }
+
+}
+@media (max-width:600px){
+
+    :root{
+
+        --install-proto-dust-width:300px;
+
+        --install-proto-dust-left:100px;
+
+        --install-proto-dust-top:90px;
+
+    }
+
+}
+
+@media (max-width:600px){
+
+    /* ===== MOBILE HEADER IMPROVEMENTS ===== */
+    .site-header {
+        height: 110px;
+        padding: 12px 18px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 50px;
+    }
+
+    .header-logo img {
+        height: 48px;
+        width: auto;
+    }
+
+    .nav-links {
+        position: static;
+        transform: none;
+        gap: 16px;
+        justify-content: center;
+        width: 100%;
+        padding: 0 8px;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        padding-bottom: 10px;
+    }
+
+    .nav-links a:hover {
+        letter-spacing: 2.5px;
+    }
+
+    .hamburger {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+    }
+
+    /* Legacy styles fallback */
+    .top-header{
+        flex-direction:column;
+        height:auto;
+        padding:12px 0;
+        gap:12px;
+    }
+
+    .nav-links.legacy {
+        gap:5px;
+        font-size:0.1;
+    }
+    .left-logo img{
+        width:70px;
+    }
+
+}
+</style>
+
+<script>
+/* =============================================
+   AUDIO MANAGER
+============================================= */
+const entranceMusic = document.getElementById('entranceMusic');
+const gameMusic     = document.getElementById('gameMusic');
+const sfxHover      = document.getElementById('sfxHover');
+const sfxClick      = document.getElementById('sfxClick');
+const sfxNavHover   = document.getElementById('sfxNavHover');
+
+gameMusic.volume    = 0.55;
+entranceMusic.volume = 0.6;
+sfxHover.volume     = 0.35;
+sfxClick.volume     = 0.5;
+sfxNavHover.volume  = 0.4;
+
+function playSfx(el) {
+    try {
+        const clone = el.cloneNode(true);
+        clone.volume = el.volume;
+        clone.play().catch(() => {});
+        clone.addEventListener('ended', () => clone.remove());
+    } catch (e) {}
+}
+
+function playClickSfx() { playSfx(sfxClick); }
+function playHoverSfx() { playSfx(sfxHover); }
+function playNavHoverSfx() { playSfx(sfxNavHover); }
+
+/* Crossfade from entrance music into the looping game theme */
+function crossfadeToGameMusic(durationMs = 1500) {
+    if (entranceMusic.paused) {
+        gameMusic.play().catch(() => {});
+        return;
+    }
+    const steps = 30;
+    const stepTime = durationMs / steps;
+    let i = 0;
+    gameMusic.volume = 0;
+    gameMusic.play().catch(() => {});
+    const fade = setInterval(() => {
+        i++;
+        entranceMusic.volume = Math.max(0, 0.6 * (1 - i / steps));
+        gameMusic.volume     = Math.min(0.55, 0.55 * (i / steps));
+        if (i >= steps) {
+            clearInterval(fade);
+            entranceMusic.pause();
+            entranceMusic.currentTime = 0;
+        }
+    }, stepTime);
+}
+
+/* Stop the looping game theme (e.g. when entering install/play) */
+function stopGameMusic(durationMs = 800) {
+    const steps = 16;
+    const stepTime = durationMs / steps;
+    let i = 0;
+    const startVol = gameMusic.volume;
+    const fade = setInterval(() => {
+        i++;
+        gameMusic.volume = Math.max(0, startVol * (1 - i / steps));
+        if (i >= steps) {
+            clearInterval(fade);
+            gameMusic.pause();
+            gameMusic.currentTime = 0;
+            gameMusic.volume = 0.55;
+        }
+    }, stepTime);
+}
+
+/* =============================================
+   WATERY CANVAS — layer-mid
+============================================= */
+const canvas = document.getElementById('layerMid');
+const ctx    = canvas.getContext('2d');
+const midImg = new Image();
+midImg.src   = 'images/parallax-mid.png';
+
+let rippleTime = 0;
+let midVisible = false;
+
+function resizeCanvas() {
+    canvas.width  = window.innerWidth  + 120;
+    canvas.height = window.innerHeight + 120;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function drawWater() {
+    if (!midVisible) { requestAnimationFrame(drawWater); return; }
+
+    rippleTime += 0.010;
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    if (midImg.complete && midImg.naturalWidth > 0) {
+        ctx.drawImage(midImg, 0, 0, w, h);
+    }
+
+    try {
+        const imgData = ctx.getImageData(0, 0, w, h);
+        const src     = new Uint8ClampedArray(imgData.data);
+        const dst     = imgData.data;
+        const AMP_X = 7, AMP_Y = 4, FREQ = 0.016, SPEED = 1.2;
+
+        for (let y = 0; y < h; y++) {
+            const dx1 = AMP_X * Math.sin(y * FREQ + rippleTime * SPEED);
+            const dy1 = AMP_Y * Math.cos(y * FREQ * 0.9 + rippleTime * SPEED * 0.8);
+            const dx2 = (AMP_X * 0.35) * Math.sin(y * FREQ * 2.7 + rippleTime * SPEED * 1.5 + 1.1);
+            const dy2 = (AMP_Y * 0.25) * Math.cos(y * FREQ * 2.1 + rippleTime * SPEED * 1.2 + 2.4);
+            const dx3 = (AMP_X * 0.15) * Math.sin(y * FREQ * 5.1 + rippleTime * SPEED * 2.2 + 0.7);
+            const dx = Math.round(dx1 + dx2 + dx3);
+            const dy = Math.round(dy1 + dy2);
+
+            for (let x = 0; x < w; x++) {
+                const sx = Math.min(Math.max(x + dx, 0), w - 1);
+                const sy = Math.min(Math.max(y + dy, 0), h - 1);
+                const di = (y * w + x) * 4;
+                const si = (sy * w + sx) * 4;
+                dst[di] = src[si]; dst[di+1] = src[si+1];
+                dst[di+2] = src[si+2]; dst[di+3] = src[si+3];
+            }
+        }
+        ctx.putImageData(imgData, 0, 0);
+    } catch(e) {}
+
+    const numCaustics = 5;
+    for (let i = 0; i < numCaustics; i++) {
+        const phase = (rippleTime * 0.4 + i * 1.3) % (Math.PI * 2);
+        const yPos  = h * (0.45 + 0.42 * ((Math.sin(phase) + 1) / 2));
+        const alpha = 0.04 + 0.03 * Math.sin(rippleTime * 1.1 + i);
+        const width = 80 + 60 * Math.sin(rippleTime * 0.7 + i * 0.9);
+        const cg = ctx.createLinearGradient(0, yPos - width, 0, yPos + width);
+        cg.addColorStop(0, 'transparent');
+        cg.addColorStop(0.5, `rgba(120,200,255,${alpha})`);
+        cg.addColorStop(1, 'transparent');
+        ctx.fillStyle = cg;
+        ctx.fillRect(0, yPos - width, w, width * 2);
+    }
+
+    const shimmer = ctx.createLinearGradient(0, h * 0.3, 0, h);
+    const sa1 = 0.10 + 0.05 * Math.sin(rippleTime * 0.6);
+    const sa2 = 0.18 + 0.06 * Math.sin(rippleTime * 0.4 + 1.0);
+    shimmer.addColorStop(0,    `rgba(5,20,60,0)`);
+    shimmer.addColorStop(0.4,  `rgba(10,50,110,${sa1})`);
+    shimmer.addColorStop(0.75, `rgba(15,70,140,${sa2})`);
+    shimmer.addColorStop(1,    `rgba(5,30,80,${sa2 * 1.3})`);
+    ctx.fillStyle = shimmer;
+    ctx.fillRect(0, 0, w, h);
+
+    const vig = ctx.createRadialGradient(w/2, h/2, h*0.35, w/2, h/2, h*0.9);
+    vig.addColorStop(0, 'rgba(0,0,0,0)');
+    vig.addColorStop(1, 'rgba(0,0,5,0.28)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, w, h);
+
+    requestAnimationFrame(drawWater);
+}
+drawWater();
+
+/* =============================================
+   PARTICLES — cinematic floating dust/light motes
+   Reusable factory so home, install and news pages can each
+   have their own independently-positioned particle layer.
+============================================= */
+let globalMouseX = 0, globalMouseY = 0;
+window.addEventListener('mousemove', (e) => {
+    globalMouseX = (e.clientX - window.innerWidth / 2) / window.innerWidth;
+    globalMouseY = (e.clientY - window.innerHeight / 2) / window.innerHeight;
+});
+
+function createParticleSystem(canvas) {
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let visible = false;
+    let time = 0;
+
+    function resize() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width  = rect.width  || window.innerWidth;
+        canvas.height = rect.height || window.innerHeight;
+        createParticles();
+    }
+
+    function createParticles() {
+        const count = Math.floor((canvas.width * canvas.height) / 9000);
+        particles = [];
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.6 + 0.3,
+                baseAlpha: Math.random() * 0.5 + 0.15,
+                twinkleSpeed: Math.random() * 0.02 + 0.005,
+                twinklePhase: Math.random() * Math.PI * 2,
+                driftX: (Math.random() - 0.5) * 0.12,
+                driftY: -Math.random() * 0.18 - 0.03,
+                depth: Math.random()
+            });
+        }
+    }
+
+    function draw() {
+        if (!visible) { requestAnimationFrame(draw); return; }
+
+        time += 1;
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        for (const p of particles) {
+            p.y += p.driftY;
+            p.x += p.driftX + Math.sin(time * 0.003 + p.twinklePhase) * 0.05;
+
+            if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+            if (p.x < -10) p.x = w + 10;
+            if (p.x > w + 10) p.x = -10;
+
+            const px = p.x + globalMouseX * 18 * p.depth;
+            const py = p.y + globalMouseY * 12 * p.depth;
+
+            const twinkle = (Math.sin(time * p.twinkleSpeed + p.twinklePhase) + 1) / 2;
+            const alpha = p.baseAlpha * (0.5 + 0.5 * twinkle);
+
+            const grad = ctx.createRadialGradient(px, py, 0, px, py, p.r * 4);
+            grad.addColorStop(0, `rgba(255,255,255,${alpha})`);
+            grad.addColorStop(0.4, `rgba(220,235,255,${alpha * 0.4})`);
+            grad.addColorStop(1, 'rgba(255,255,255,0)');
+
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(px, py, p.r * 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = `rgba(255,255,255,${Math.min(alpha * 1.6, 1)})`;
+            ctx.beginPath();
+            ctx.arc(px, py, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+
+    return {
+        setVisible: (v) => { visible = v; },
+        resize
+    };
+}
+
+// Home page particle layer
+const particleCanvas = document.getElementById('particleCanvas');
+const homeParticles  = createParticleSystem(particleCanvas);
+
+// Install page particle layer (separately positioned via CSS vars)
+const installParticleCanvas = document.getElementById('installParticleCanvas');
+const installParticles = createParticleSystem(installParticleCanvas);
+
+// News page particle layer (separately positioned via CSS vars)
+const newsParticleCanvas = document.getElementById('newsParticleCanvas');
+const newsParticles = createParticleSystem(newsParticleCanvas);
+
+/* =============================================
+   PARALLAX — mouse tilt
+============================================= */
+const cssVars    = getComputedStyle(document.documentElement);
+const frontBaseX = parseFloat(cssVars.getPropertyValue('--front-x'))     || 0;
+const frontBaseY = parseFloat(cssVars.getPropertyValue('--front-y'))     || 0;
+const frontScale = parseFloat(cssVars.getPropertyValue('--front-scale')) || 1;
+
+const LAYERS = [
+    { el: document.getElementById('layerBack'),  depth: 0.010, baseX: 0,          baseY: 0,          baseScale: 1 },
+    { el: canvas,                                 depth: 0.025, baseX: 0,          baseY: 0,          baseScale: 1 },
+    { el: document.getElementById('layerFront'), depth: 0.048, baseX: frontBaseX, baseY: frontBaseY, baseScale: frontScale },
+];
+
+window.addEventListener('mousemove', (e) => {
+    const dx = e.clientX - window.innerWidth  / 2;
+    const dy = e.clientY - window.innerHeight / 2;
+    LAYERS.forEach(({ el, depth, baseX, baseY, baseScale }) => {
+        const tx = baseX + dx * depth;
+        const ty = baseY + dy * depth;
+        el.style.transform = baseScale !== 1
+            ? `translate(${tx}px,${ty}px) scale(${baseScale})`
+            : `translate(${tx}px,${ty}px)`;
+    });
+});
+
+/* =============================================
+   VIEW / NAVIGATION STATE
+============================================= */
+const homeView       = document.getElementById('homeView');
+const installView    = document.getElementById('installView');
+const newsView       = document.getElementById('newsView');
+const homeParallax   = document.getElementById('homeParallax');
+const leftGradient   = document.getElementById('leftGradient');
+const installBg      = document.getElementById('installBackground');
+const newsBg         = document.getElementById('newsBackground');
+const navHome        = document.getElementById('navHome');
+const navInstall     = document.getElementById('navInstall');
+const navNews        = document.getElementById('navNews');
+const header         = document.getElementById('siteHeader');
+
+let currentView = 'home';
+
+function setActiveNav(view) {
+    navHome.classList.toggle('active', view === 'home');
+    navInstall.classList.toggle('active', view === 'install');
+    navNews.classList.toggle('active', view === 'news');
+}
+
+/* Hide all "scene" backgrounds/effects shared across views,
+   then let each view-specific function turn on what it needs. */
+function hideAllSceneLayers() {
+    homeParallax.classList.add('hidden');
+    particleCanvas.classList.add('hidden');
+    leftGradient.classList.add('hidden');
+
+    installBg.classList.remove('visible');
+    installParticles.setVisible(false);
+
+    newsBg.classList.remove('visible');
+    newsParticles.setVisible(false);
+}
+
+function goToInstall() {
+    if (currentView === 'install') return;
+
+    homeView.classList.remove('active');
+    newsView.classList.remove('active');
+    installView.classList.add('active');
+
+    hideAllSceneLayers();
+
+    installBg.classList.add('visible');
+    installParticles.resize();
+    installParticles.setVisible(true);
+
+    currentView = 'install';
+    setActiveNav('install');
+}
+
+function goToNews() {
+    if (currentView === 'news') return;
+
+    homeView.classList.remove('active');
+    installView.classList.remove('active');
+    newsView.classList.add('active');
+
+    hideAllSceneLayers();
+
+    newsBg.classList.add('visible');
+    newsParticles.resize();
+    newsParticles.setVisible(true);
+
+    currentView = 'news';
+    setActiveNav('news');
+
+    loadLatestYouTubeVideos();
+}
+
+function goToHome() {
+    if (currentView === 'home') return;
+
+    installView.classList.remove('active');
+    newsView.classList.remove('active');
+    homeView.classList.add('active');
+
+    hideAllSceneLayers();
+
+    // restore home visuals only if intro has already played
+    if (clicked) {
+        homeParallax.classList.remove('hidden');
+        particleCanvas.classList.remove('hidden');
+        leftGradient.classList.remove('hidden');
+        homeParticles.setVisible(true);
+    }
+
+    currentView = 'home';
+    setActiveNav('home');
+}
+
+navHome.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    playClickSfx();
+    goToHome();
+});
+
+navInstall.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    playClickSfx();
+    goToInstall();
+});
+
+navNews.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    playClickSfx();
+    goToNews();
+});
+
+/* Header hover SFX — nav items, logo, hamburger */
+[navHome, navInstall, navNews, document.querySelector('.header-logo'), document.querySelector('.hamburger')]
+    .forEach(el => {
+        if (!el) return;
+        el.addEventListener('mouseenter', playNavHoverSfx);
+    });
+
+/* "PROTOTYPE AVAILABLE" button on Home — takes the player to Install */
+const homePrototypeBtn = document.getElementById('homePrototypeBtn');
+homePrototypeBtn.addEventListener('mouseenter', playHoverSfx);
+homePrototypeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    playClickSfx();
+    goToInstall();
+});
+
+/* Prototype "Click to Play" CTA — placeholder link target.
+   Update href on #installPrototypeBtn in the HTML once the
+   actual destination is ready. */
+const installPrototypeBtn = document.getElementById('installPrototypeBtn');
+installPrototypeBtn.addEventListener('mouseenter', playHoverSfx);
+installPrototypeBtn.addEventListener('click', (e) => {
+    if (installPrototypeBtn.getAttribute('href') === '#') {
+        e.preventDefault();
+    }
+    e.stopPropagation();
+    playClickSfx();
+    // Player is heading into the actual game — stop the looping theme.
+    stopGameMusic();
+});
+
+/* Install meta items (Info / Versions) — hover + click sfx */
+document.querySelectorAll('.install-meta-item').forEach(item => {
+    item.addEventListener('mouseenter', playHoverSfx);
+    item.addEventListener('click', playClickSfx);
+});
+
+/* News cards — hover + click sfx */
+document.querySelectorAll('.news-card').forEach(card => {
+    card.addEventListener('mouseenter', playHoverSfx);
+    card.addEventListener('click', playClickSfx);
+});
+
+/* News page action items (Expand / Patches) — hover + click sfx
+   (decorative for now; wire up real behavior later) */
+document.querySelectorAll('.news-action-item').forEach(item => {
+    item.addEventListener('mouseenter', playHoverSfx);
+    item.addEventListener('click', playClickSfx);
+});
+
+/* =============================================
+   YOUTUBE — LATEST VIDEOS (NEWS PAGE)
+============================================= */
+// Remember to restrict this key in the Google Cloud Console:
+// API restrictions -> YouTube Data API v3 only, and
+// Application restrictions -> HTTP referrers -> your domain only.
+const YT_API_KEY   = 'AIzaSyCeZ5yFFz_MP6s0ymj3kRnQpa9dri3eYh0';
+const YT_HANDLE    = 'hereisval';            // channel handle (without the @)
+const YT_MAX_VIDEOS = 3;                     // matches the number of news cards
+
+let youtubeVideosLoaded = false;
+
+function formatYouTubeDate(isoString) {
+    const date = new Date(isoString);
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).toUpperCase();
+}
+
+function truncateDescription(text, maxLength = 160) {
+    if (!text) return '';
+    const cleaned = text.replace(/\s+/g, ' ').trim();
+    if (cleaned.length <= maxLength) return cleaned;
+    return cleaned.slice(0, maxLength).trim() + '...';
+}
+
+async function fetchChannelIdFromHandle(handle, apiKey) {
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=id&forHandle=${encodeURIComponent('@' + handle)}&key=${apiKey}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Channel lookup failed: ${res.status}`);
+    const data = await res.json();
+    if (!data.items || !data.items.length) throw new Error('Channel not found for handle: ' + handle);
+    return data.items[0].id;
+}
+
+async function fetchLatestVideos(channelId, apiKey, maxResults) {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&order=date&type=video&maxResults=${maxResults}&key=${apiKey}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Video search failed: ${res.status}`);
+    const data = await res.json();
+    return data.items || [];
+}
+
+function populateNewsCard(index, video) {
+    const cardNum = index + 1;
+    const iframe = document.getElementById(`newsVideo${cardNum}`);
+    const card   = document.getElementById(`newsCard${cardNum}`);
+    if (!iframe || !card) return;
+
+    const videoId = video.id.videoId;
+    const snippet = video.snippet;
+
+    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.title = `Celestial Skies News Video ${cardNum} - ${snippet.title}`;
+
+    card.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+    const titleEl = card.querySelector('.news-card-title');
+    const descEl  = card.querySelector('.news-card-desc');
+    const dateEl  = card.querySelector('.news-card-date');
+
+    if (titleEl) titleEl.textContent = snippet.title;
+    if (descEl)  descEl.textContent  = truncateDescription(snippet.description, 180);
+    if (dateEl)  dateEl.textContent  = `DATE: ${formatYouTubeDate(snippet.publishedAt)}`;
+}
+
+async function loadLatestYouTubeVideos() {
+    if (youtubeVideosLoaded) return;
+    if (!YT_API_KEY || YT_API_KEY === 'YOUR_YOUTUBE_API_KEY') {
+        console.warn('YouTube API key not set — skipping live news fetch.');
+        return;
+    }
+
+    try {
+        const channelId = await fetchChannelIdFromHandle(YT_HANDLE, YT_API_KEY);
+        const videos = await fetchLatestVideos(channelId, YT_API_KEY, YT_MAX_VIDEOS);
+
+        videos.forEach((video, index) => populateNewsCard(index, video));
+        youtubeVideosLoaded = true;
+    } catch (err) {
+        console.error('Failed to load latest YouTube videos:', err);
+    }
+}
+
+
+/* =============================================
+   CLICK SEQUENCE (intro)
+============================================= */
+let clicked = false;
+
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-links') || e.target.closest('.hamburger')) return;
+    if (currentView !== 'home') return;
+    if (clicked && (e.target.closest('.prototype-btn') || e.target.closest('#homePrototypeBtn'))) return;
+    if (clicked) return;
+    clicked = true;
+
+    /* Begin entrance music immediately on first interaction
+       (browsers require a user gesture to allow audio). */
+    entranceMusic.currentTime = 0;
+    entranceMusic.play().catch(() => {});
+
+    homeView.classList.add('active');
+
+    const container      = document.getElementById('titleContainer');
+    const ui              = document.getElementById('uiLayer');
+    const backdrop        = document.getElementById('logoBackdrop');
+    const storyBlock      = document.getElementById('storyBlock');
+    const prototypeBlock  = document.getElementById('prototypeBlock');
+
+    container.classList.add('drifted');
+    ui.style.opacity = '0';
+
+    setTimeout(() => { backdrop.classList.add('visible'); },   800);
+    setTimeout(() => { ui.style.display = 'none'; },         1200);
+    setTimeout(() => { header.classList.add('visible'); },    1500);
+    setTimeout(() => { setActiveNav('home'); },               1500);
+
+    setTimeout(() => {
+        document.getElementById('layerBack').classList.add('visible');
+        leftGradient.classList.add('visible');
+    }, 2200);
+
+    setTimeout(() => {
+        homeParticles.setVisible(true);
+        particleCanvas.classList.add('visible');
+    }, 2200);
+
+    setTimeout(() => {
+        midVisible = true;
+        canvas.classList.add('visible');
+    }, 3000);
+
+    setTimeout(() => {
+        document.getElementById('layerFront').classList.add('visible');
+    }, 4000);
+
+    setTimeout(() => {
+        storyBlock.classList.add('visible');
+    }, 4600);
+
+    setTimeout(() => {
+        prototypeBlock.classList.add('visible');
+    }, 5000);
+
+    /* Once the full entrance sequence has finished playing out
+       (story + prototype blocks settled in), crossfade from the
+       entrance music into the looping game theme. */
+    setTimeout(() => {
+        crossfadeToGameMusic(1500);
+    }, 6200);
+});
+
+// home view visible by default (pre-click landing state)
+homeView.classList.add('active');
+</script>
+
+</body>
+</html>
